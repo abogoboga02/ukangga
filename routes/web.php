@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DataKamarController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
         
-Route::get('admin', function () { return view('form.admin'); })->name('admin')->middleware('checkRole:admin');
+Route::get('admin', function () { return view('form.admin'); })->middleware('checkRole:admin');
 Route::get('penjual', function () { return view('form.penjual'); })->middleware(['checkRole:penjual,admin']);
 Route::get('pembeli', function () { return view('form.pembeli'); })->middleware(['checkRole:pembeli,admin']);
+Route::resource('data-kamar', DataKamarController::class);
